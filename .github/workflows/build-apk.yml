@@ -57,10 +57,10 @@ jobs:
           echo "$content" > ${{ env.projectName }}${{ github.event.inputs.repo-dir }}/local.properties
         
       - name: setup
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: 11
+          java-version: 17
           cache: "gradle"
           
       - name: build
