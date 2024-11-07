@@ -66,6 +66,7 @@ jobs:
         if: ${{ github.event.inputs.sign == 'false' }}
         run: |
           cd ${{ env.projectName }}${{ github.event.inputs.repo-dir }}
+         if [ ! -f "gradlew" ]; then gradle wrapper; fi
           chmod +x gradlew
           ./gradlew ${{ github.event.inputs.module }}:assembleRelease
           
