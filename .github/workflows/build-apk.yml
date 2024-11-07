@@ -1,5 +1,4 @@
 name: build apk
-
 on:
   workflow_dispatch:
     inputs:
@@ -28,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         
       - name: clone
         run: |
