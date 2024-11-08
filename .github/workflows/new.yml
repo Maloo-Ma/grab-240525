@@ -1,6 +1,7 @@
 name: Build Android APK
-  workflow_dispatch:
-    inputs:
+workflow_dispatch:
+  
+inputs:
       repo-url:
         description: 'git clone url'
         required: true
@@ -11,28 +12,28 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-   - name: Setup Ninja 
-        uses: seanmiddleditch/gha-setup-ninja@master
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
+    - name: Setup Ninja 
+      uses: seanmiddleditch/gha-setup-ninja@master
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '17' 
           
-      - name: clone
-        run: |
+    - name: clone
+      run: |
           git clone ${{ github.event.inputs.repo-url }}
           echo "projectName=$(basename -s .git ${{ github.event.inputs.repo-url }})" >> $GITHUB_ENV
           echo "dirName=$(echo ${{ github.event.inputs.repo-dir }} | sed -r 's/[/]+/ - /g')" >> $GITHUB_ENV
         
-      - name: select commit
-        if: ${{ github.event.inputs.repo-commit != '' }}
-        run: |
+    - name: select commit
+      if: ${{ github.event.inputs.repo-commit != '' }}
+      run: |
           cd ${{ env.projectName }}
           git checkout ${{ github.event.inputs.repo-commit }}
 
-      - name: build
-        run: |
+    - name: build
+      run: |
           cd ${{ env.projectName }}${{ github.event.inputs.repo-dir }}
           if [ ! -f "gradlew" ]; then gradle wrapper; fi
           chmod +x gradlew
