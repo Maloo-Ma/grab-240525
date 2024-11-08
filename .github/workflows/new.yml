@@ -1,4 +1,4 @@
-name: build apkon:
+name: Build Android APK
   workflow_dispatch:
     inputs:
       repo-url:
