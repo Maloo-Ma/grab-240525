@@ -11,6 +11,8 @@ on:
       repository :
         description: 'git clone url'
         required: true
+      repo-commit:
+        description: 'commit'
    
    
 jobs:
@@ -23,7 +25,12 @@ jobs:
          git clone ${{ github.event.inputs.repository }}
          echo "projectName=$(basename -s .git ${{ github.event.inputs.repository }})" >> $GITHUB_ENV
 
-       
+     - name: select commit
+       if: ${{ github.event.inputs.repo-commit != '' }}
+       run: |
+         cd ${{ env.projectName }}
+         git checkout ${{ github.event.inputs.repo-commit }}
+          
      - name: Setup JDK
        uses: actions/setup-java@v4
        with:
