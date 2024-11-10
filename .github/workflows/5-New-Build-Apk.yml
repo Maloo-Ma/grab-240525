@@ -38,7 +38,7 @@ jobs:
           
      - name: build
        run: |
-        cd cd ${{github.action_path}}${{ github.event.inputs.repo-dir }}
+          cd ${{ github.action_path}}${{ github.event.inputs.repo-dir }}
           chmod +x gradlew
           ./gradlew ${{ github.event.inputs.module }} --stacktrace
 
