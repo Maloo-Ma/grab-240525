@@ -8,10 +8,6 @@ on:
         default: "10"
       repo-dir:
         description: 'directory containing settings.gradle ("/..")'
-      module:
-        description: 'module'
-        required: true
-        default: 'app'
       repository :
         description: 'git clone url'
         required: true
@@ -39,7 +35,7 @@ jobs:
        run: |
           cd ${{ env.projectName }}${{ github.event.inputs.repo-dir }}
           chmod +x gradlew
-          ./gradlew ${{ github.event.inputs.module }} --stacktrace
+          ./gradlew assembleDebug --stacktrace
 
  
      - name: Upload the APK artifact 
