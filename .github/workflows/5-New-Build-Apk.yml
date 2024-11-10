@@ -27,9 +27,7 @@ jobs:
          git clone ${{ github.event.inputs.repository }}
          echo "projectName=$(basename -s .git ${{ github.event.inputs.repo-url }})" >> $GITHUB_ENV
          
-     - name: directory change 
-       run: |
-         cd ${{ env.projectName }}
+
        
      - name: Setup JDK
        uses: actions/setup-java@v4
@@ -40,7 +38,7 @@ jobs:
           
      - name: build
        run: |
-        cd ${{ env.projectName }}${{ github.event.inputs.repo-dir }}
+        cd cd ${{github.action_path}}${{ github.event.inputs.repo-dir }}
           chmod +x gradlew
           ./gradlew ${{ github.event.inputs.module }} --stacktrace
 
