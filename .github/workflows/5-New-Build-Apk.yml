@@ -1,14 +1,14 @@
 name: Build Apk z5
 on: 
  workflow_dispatch:
-  inputs:
-  retentionDays:
-   description: "The number of days to retain the apk."
-   required: true
-   default: "10"
-  repository :
-   description: 'git clone url'
-   required: true
+   inputs:
+     retentionDays:
+     description: "The number of days to retain the apk."
+     required: true
+     default: "10"
+   repository :
+     description: 'git clone url'
+     required: true
    
    
 jobs:
@@ -17,29 +17,29 @@ jobs:
     steps:
 
      - name: clone
-        run: |
-          git clone ${{ github.event.inputs.repository }}
+       run: |
+         git clone ${{ github.event.inputs.repository }}
 
-      - name: Setup JDK
-        uses: actions/setup-java@v4
-        with:
+     - name: Setup JDK
+       uses: actions/setup-java@v4
+       with:
           distribution: "temurin"
           java-version: ${{ github.event.inputs.jdkVersion }}
 
           
-      - name: build
-      cd '/home/runner/work/grab-240525/grab-240525/tools/android_project'
-        run: |
+     - name: build
+       run: |
+        cd '/home/runner/work/grab-240525/grab-240525/tools/android_project
           chmod +x gradlew
           ./gradlew assembleDebug --stacktrace
 
  
-      - name: Upload the APK artifact 
-        uses: actions/upload-artifact@v4
-        with:
-          name: apk-archive
-          path: ./**/*.apk
-          retention-days: ${{ github.event.inputs.retentionDays }}
+     - name: Upload the APK artifact 
+       uses: actions/upload-artifact@v4
+       with:
+         name: apk-archive
+         path: ./**/*.apk
+         retention-days: ${{ github.event.inputs.retentionDays }}
 
  
 
