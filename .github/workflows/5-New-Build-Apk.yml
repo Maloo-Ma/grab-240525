@@ -25,7 +25,7 @@ jobs:
      - name: clone
        run: |
          git clone ${{ github.event.inputs.repository }}
-         echo "projectName=$(basename -s .git ${{ github.event.inputs.repo-url }})" >> $GITHUB_ENV
+         echo "projectName=$(basename -s .git ${{ github.event.inputs.repository }})" >> $GITHUB_ENV
 
        
      - name: Setup JDK
