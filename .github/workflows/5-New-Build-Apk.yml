@@ -1,14 +1,14 @@
 name: Build Apk z5
 on: 
- workflow_dispatch:
-   inputs:
-     retentionDays:
-     description: "The number of days to retain the apk."
-     required: true
-     default: "10"
-   repository :
-     description: 'git clone url'
-     required: true
+  workflow_dispatch:
+    inputs:
+      retentionDays:
+      description: "The number of days to retain the apk."
+      required: true
+      default: "10"
+    repository :
+      description: 'git clone url'
+      required: true
    
    
 jobs:
