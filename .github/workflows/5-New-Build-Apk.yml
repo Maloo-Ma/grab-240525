@@ -26,7 +26,11 @@ jobs:
        run: |
          git clone ${{ github.event.inputs.repository }}
          echo "projectName=$(basename -s .git ${{ github.event.inputs.repo-url }})" >> $GITHUB_ENV
-
+         
+     - name: directory change 
+       run: |
+         cd ${{ env.projectName }}
+       
      - name: Setup JDK
        uses: actions/setup-java@v4
        with:
